@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyrox 15-Week Prep Plan</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Courier New', Courier, monospace;
+    background: #07090f;
+    color: #e2e8f0;
+    min-height: 100vh;
+  }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0d0d1f 0%, #1a0900 50%, #080d1a 100%);
+    border-bottom: 1px solid #1e293b;
+    padding: 32px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-glow {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 60%, rgba(249,115,22,0.10) 0%, transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(96,165,250,0.07) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 11px; letter-spacing: 4px; color: #f97316;
+    margin-bottom: 8px; font-weight: 700; position: relative;
+  }
+  .header h1 {
+    font-size: clamp(20px, 5vw, 36px); font-weight: 900;
+    letter-spacing: -1px; line-height: 1; position: relative;
+  }
+  .header-sub {
+    font-size: 11px; color: #94a3b8; margin-top: 8px;
+    letter-spacing: 1px; position: relative;
+  }
+  .phase-timeline {
+    display: flex; margin-top: 20px; border-radius: 4px;
+    overflow: hidden; max-width: 480px; position: relative;
+  }
+  .phase-bar { padding: 6px 8px; }
+  .phase-bar-label { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; }
+  .phase-bar-weeks { font-size: 10px; color: #64748b; }
+
+  /* Filters */
+  .filters {
+    padding: 16px 20px 0;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 7px 13px; border-radius: 4px; font-size: 10px;
+    font-weight: 700; letter-spacing: 2px; transition: all 0.15s;
+    border: 1px solid;
+  }
+
+  /* Phase banner */
+  .phase-banner {
+    margin: 12px 20px 0; padding: 10px 14px;
+    border-radius: 4px; border-left-width: 3px; border-left-style: solid;
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  }
+  .phase-banner-label { font-weight: 800; font-size: 11px; letter-spacing: 2px; }
+  .phase-banner-weeks { font-size: 12px; color: #e2e8f0; }
+  .phase-banner-sep { color: #475569; }
+  .phase-banner-desc { font-size: 11px; color: #94a3b8; }
+
+  /* Week list */
+  .week-list { padding: 16px 20px 48px; }
+  .week-item { margin-bottom: 6px; }
+
+  .week-header {
+    width: 100%; text-align: left;
+    padding: 13px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.15s; border: 1px solid;
+  }
+  .week-header-left {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .week-num {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px; min-width: 54px;
+  }
+  .week-phase-tag {
+    font-size: 9px; padding: 2px 7px; border-radius: 2px;
+    font-weight: 700; letter-spacing: 2px;
+  }
+  .week-sessions { font-size: 11px; color: #475569; }
+  .week-badge {
+    font-size: 9px; padding: 2px 7px; border-radius: 2px; letter-spacing: 1px;
+  }
+  .badge-deload { background: #1e293b; color: #94a3b8; }
+  .badge-lastsim { background: #2d1515; color: #f87171; }
+  .week-toggle { font-size: 18px; line-height: 1; }
+
+  /* Week content grid */
+  .week-content {
+    border-top: none; border-radius: 0 0 6px 6px;
+    background: #07090f; padding: 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    gap: 10px;
+  }
+
+  /* Day card */
+  .day-card { border-radius: 4px; padding: 13px; border: 1px solid; border-top-width: 2px; border-top-style: solid; }
+  .day-card-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; margin-bottom: 10px;
+  }
+  .day-label { font-size: 9px; color: #475569; letter-spacing: 2px; margin-bottom: 3px; }
+  .day-title { font-size: 13px; font-weight: 700; color: #e2e8f0; line-height: 1.3; }
+  .day-type-tag {
+    font-size: 8px; padding: 3px 6px; border-radius: 2px;
+    font-weight: 800; letter-spacing: 1.5px; white-space: nowrap;
+    margin-left: 8px; margin-top: 2px; flex-shrink: 0;
+  }
+  .day-items { list-style: none; }
+  .day-item {
+    font-size: 11px; padding: 3px 0; line-height: 1.5;
+  }
+  .item-dot { font-size: 10px; margin-right: 6px; }
+
+  /* Legend */
+  .legend {
+    border-top: 1px solid #1e293b; padding: 14px 20px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: #07090f; align-items: center;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .legend-label { font-size: 9px; color: #475569; letter-spacing: 1.5px; }
+  .legend-credits { margin-left: auto; font-size: 9px; color: #334155; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-glow"></div>
+  <div class="header-eyebrow">DOUBLES DIVISION · EXPERIENCED LIFTER</div>
+  <h1>HYROX 15-WEEK <span style="color:#f97316">PREP PLAN</span> <span style="color:#7c3aed">v2</span></h1>
+  <div class="header-sub">RACE DAY: SEPTEMBER 6 &nbsp;·&nbsp; 4–5 SESSIONS/WEEK &nbsp;·&nbsp; GLUTE-FOCUSED · MUSCLE-PRESERVING</div>
+  <div class="phase-timeline" id="phaseTimeline"></div>
+</div>
+
+<div class="filters" id="filters"></div>
+<div id="phaseBanner"></div>
+<div class="week-list" id="weekList"></div>
+
+<div class="legend" id="legend"></div>
+
+<script>
+const phases = [
+  { id:1, name:"BASE",          weeks:"1–4",   color:"#4ade80", bg:"#052e16", desc:"Build aerobic base, establish movement patterns with full load" },
+  { id:2, name:"BUILD",         weeks:"5–9",   color:"#facc15", bg:"#1c1400", desc:"Increase running volume & intensity, heavier station work" },
+  { id:3, name:"RACE-SPECIFIC", weeks:"10–13", color:"#f97316", bg:"#1c0a00", desc:"Simulate race conditions, train stations under fatigue" },
+  { id:4, name:"TAPER",         weeks:"14–15", color:"#60a5fa", bg:"#0a1628", desc:"Recover fully, stay sharp, race-ready" },
+];
+
+const typeColors = {
+  strength: { bg:"#12102a", border:"#7c3aed", tag:"#7c3aed", label:"STRENGTH" },
+  run:      { bg:"#0a1a22", border:"#22d3ee", tag:"#22d3ee", label:"RUN" },
+  hyrox:    { bg:"#1a0d00", border:"#f97316", tag:"#f97316", label:"HYROX SIM" },
+  recovery: { bg:"#0a1a0a", border:"#4ade80", tag:"#4ade80", label:"RECOVERY" },
+  race:     { bg:"#1a0818", border:"#f472b6", tag:"#f472b6", label:"RACE DAY" },
+};
+
+const weeks = [
+  // ─── PHASE 1 ───
+  { week:1, phase:1, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute Focus", items:[
+      "Leg Press 4×6 (working weight — you know your numbers)",
+      "Romanian Deadlift 4×8",
+      "Barbell Hip Thrust 4×10 (setup: upper back on bench, heavy)",
+      "Bulgarian Split Squat 3×8/leg (bodyweight or light DB)",
+      "Farmers Carry 4×30m",
+      "Wall Balls 4×12 (light — learn the movement)",
+    ]},
+    { label:"Day 2", type:"run", title:"Easy Zone 2 Run", items:[
+      "20 min easy run/walk — conversational pace only",
+      "Walk breaks fully fine in week 1",
+      "Focus: nasal breathing, relaxed jaw & shoulders",
+      "Note: this will feel too easy — that's correct",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength + Cardio Machine Intro", items:[
+      "Bench Press 4×6",
+      "Bent Over Row 4×6",
+      "Overhead Press 3×8",
+      "Weighted Pull-ups or Lat Pulldown 3×8",
+      "Face Pulls 3×15 (shoulder health — important for ski erg)",
+      "Ski Erg or Row: 3×2 min easy, 2 min rest",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Station Intro Circuit", items:[
+      "2 rounds, rest 4 min between:",
+      "→ 500m Row (easy — feel the movement)",
+      "→ 500m Ski Erg (easy — arms + hinge pattern)",
+      "→ 25m Sled Push (light — dial in body position)",
+      "→ 25m Sled Pull (light — low hips, drive through heels)",
+      "Focus: technique over intensity entirely",
+    ]},
+  ]},
+  { week:2, phase:1, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute Focus", items:[
+      "Leg Press 4×6 (add load vs W1)",
+      "RDL 4×8 (add load)",
+      "Barbell Hip Thrust 4×10 (add load — drive through heels, squeeze at top)",
+      "Bulgarian Split Squat 3×8/leg (add light DBs)",
+      "Farmers Carry 4×35m (heavier)",
+      "Wall Balls 4×15",
+    ]},
+    { label:"Day 2", type:"run", title:"Zone 2 Run", items:[
+      "22–25 min continuous at easy pace",
+      "Note your natural comfortable pace — it'll become your benchmark",
+      "Still conversational — you should hold a sentence easily",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength + Conditioning", items:[
+      "Bench Press 4×5",
+      "Bent Over Row 4×6",
+      "OHP 3×8",
+      "Weighted Pull-ups 3×6",
+      "Face Pulls 3×15",
+      "Finisher: 10 min alternating 250m Row / 10 Burpee Broad Jumps",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Station Work", items:[
+      "3 rounds, rest 3 min between:",
+      "→ 500m Row",
+      "→ 500m Ski Erg",
+      "→ 25m Sled Push (add a little weight vs W1)",
+      "→ 25m Sled Pull",
+    ]},
+  ]},
+  { week:3, phase:1, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute Focus", items:[
+      "Leg Press 4×5 (heavier — working sets)",
+      "RDL 4×6 (heavier)",
+      "Barbell Hip Thrust 4×8 (add significant load — this is your glute strength day)",
+      "Bulgarian Split Squat 3×8/leg (heavier DBs)",
+      "Cable Kickback 3×15/leg (controlled — full hip extension at top)",
+      "Farmers Carry 4×40m",
+      "Wall Balls 5×15",
+    ]},
+    { label:"Day 2", type:"run", title:"Zone 2 Run + Strides", items:[
+      "28 min continuous Zone 2",
+      "Last 5 min: 4 strides (20 sec at fast-but-controlled pace, 40 sec easy walk)",
+      "Strides build turnover without taxing the system",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength + Ski Erg Work", items:[
+      "Bench Press 4×5",
+      "Bent Over Row 4×5",
+      "OHP 3×6",
+      "Weighted Pull-ups 3×6",
+      "Face Pulls 3×15",
+      "Ski Erg: 4×250m at moderate effort, 90 sec rest",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Run + Station Combo", items:[
+      "Run 1km easy → 25 Burpee Broad Jumps",
+      "Run 1km easy → Farmers Carry 50m",
+      "Run 1km easy → Wall Balls 20 reps",
+      "Rest 2–3 min between each run-station block",
+      "Focus: how does your body feel running after a station?",
+    ]},
+  ]},
+  { week:4, phase:1, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Deload Volume", items:[
+      "Leg Press 3×5 (same load as W3, fewer sets)",
+      "RDL 3×6",
+      "Barbell Hip Thrust 3×8 (moderate load)",
+      "Bulgarian Split Squat 2×8/leg",
+      "Farmers Carry 3×40m",
+      "Wall Balls 3×15",
+    ]},
+    { label:"Day 2", type:"run", title:"Easy Run — Deload", items:[
+      "25 min easy Zone 2 — true deload effort",
+      "Focus on form: midfoot strike, arms at 90°, tall posture",
+      "No strides this week",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper — Deload Volume", items:[
+      "Bench Press 3×5",
+      "Bent Over Row 3×6",
+      "OHP 3×6",
+      "Pull-ups 3×5",
+      "Face Pulls 2×15",
+      "Light Row or Ski Erg: 2×3 min easy",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Light Station Review", items:[
+      "Easy run-through of all 8 stations at 60% effort:",
+      "Row 500m / Ski Erg 500m / Sled Push 25m / Sled Pull 25m",
+      "Burpee Broad Jumps 20m / Farmers Carry 50m / Sandbag Lunge 25m / Wall Balls 15",
+      "No rush — dial in form on sandbag lunge & wall ball",
+    ]},
+  ]},
+  // ─── PHASE 2 ───
+  { week:5, phase:2, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute (Heavier)", items:[
+      "Leg Press 4×5 (push load beyond Phase 1)",
+      "RDL 4×6 (heavier — controlled eccentric)",
+      "Barbell Hip Thrust 5×8 (add volume + load — priority lift)",
+      "Bulgarian Split Squat 4×6/leg (heavier)",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 4×50m",
+      "Wall Balls 5×18",
+    ]},
+    { label:"Day 2", type:"run", title:"Zone 2 Run", items:[
+      "32 min continuous Zone 2",
+      "Pace should feel controlled and purposeful — not a stroll",
+      "Slightly harder than Phase 1 efforts",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength + Conditioning", items:[
+      "Bench Press 4×5",
+      "Bent Over Row 4×5",
+      "OHP 3×6",
+      "Weighted Pull-ups 3×6",
+      "Face Pulls 3×15",
+      "Finisher: 12 min AMRAP — 250m Ski Erg + 8 Burpee Broad Jumps",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Run + Station Combo", items:[
+      "Run 1km / Row 500m / Run 1km / Ski Erg 500m",
+      "Run 1km / Sled Push 25m / Run 1km / Sled Pull 25m",
+      "Rest 2 min between each run-station block",
+      "Focus: keep run pace consistent across all 4 runs",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Active Recovery + Glute Accessory", items:[
+      "20 min easy bike or walk",
+      "Banded Glute Bridge 3×20 (light band, focus on squeeze)",
+      "Clamshells 3×20/side",
+      "Hip flexor + hamstring stretch: 10 min",
+    ]},
+  ]},
+  { week:6, phase:2, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute", items:[
+      "Leg Press 4×5 (increase load)",
+      "RDL 4×5 (heavier)",
+      "Barbell Hip Thrust 5×6 (increase load — lower reps, heavier bar)",
+      "Bulgarian Split Squat 4×6/leg (heavier)",
+      "Glute-Focused Single Leg Press 3×10/leg (foot high on platform)",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 4×50m",
+      "Wall Balls 5×20",
+    ]},
+    { label:"Day 2", type:"run", title:"Interval Run", items:[
+      "Warm up: 5 min easy jog",
+      "Main: 6×400m at hard but sustainable effort",
+      "Rest: 90 sec between intervals",
+      "Cool down: 5 min easy",
+      "Total ~4.5km — first real interval session",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength", items:[
+      "Bench Press 4×5",
+      "Bent Over Row 4×5",
+      "OHP 3×6",
+      "Weighted Pull-ups 3×6",
+      "Face Pulls 3×15",
+      "Ski Erg: 5×250m moderate-hard, 60 sec rest",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Partial Hyrox Simulation", items:[
+      "Run 1km / Burpee Broad Jumps 40m / Run 1km",
+      "/ Farmers Carry 100m / Run 1km",
+      "/ Sandbag Lunge 50m / Run 1km / Wall Balls 38",
+      "Rest 2 min between each block",
+      "Doubles reps & distances throughout",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Zone 2 + Mobility", items:[
+      "25 min easy Zone 2 (bike, row, or run)",
+      "Hip 90/90 × 2 min/side, couch stretch × 90 sec/side",
+      "Foam roll: quads, IT band, glutes, calves",
+    ]},
+  ]},
+  { week:7, phase:2, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute (Peak Volume)", items:[
+      "Leg Press 5×5 (heaviest yet)",
+      "RDL 4×5",
+      "Barbell Hip Thrust 5×6 (heavier than W6)",
+      "Bulgarian Split Squat 4×6/leg",
+      "Glute-Focused Single Leg Press 3×10/leg",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 5×50m",
+      "Wall Balls 5×20",
+    ]},
+    { label:"Day 2", type:"run", title:"Zone 2 + Strides", items:[
+      "35 min Zone 2 run",
+      "Last 5 min: 6 strides (20 sec fast / 40 sec easy)",
+      "Focus on relaxed, fast turnover during strides",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength + Row", items:[
+      "Bench Press 4×4",
+      "Bent Over Row 4×5",
+      "OHP 3×5",
+      "Weighted Pull-ups 4×5",
+      "Face Pulls 3×15",
+      "Row: 3×500m at race effort, 2 min rest",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Stations Under Fatigue", items:[
+      "Run 1km / Row 500m / Run 1km / Ski Erg 500m",
+      "Run 1km / Sled Push 50m / Run 1km / Sled Pull 50m",
+      "Goal: maintain the same run split on each 1km",
+      "This is the core skill that wins Hyrox",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Active Recovery + Glute Accessory", items:[
+      "20 min easy movement of choice",
+      "Banded Glute Bridge 3×20",
+      "Clamshells 3×20/side",
+      "Single Leg Glute Bridge 3×12/leg (bodyweight, slow)",
+      "Breathing drills: box breathing 4-4-4-4 × 5 min",
+    ]},
+  ]},
+  { week:8, phase:2, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Quad + Glute", items:[
+      "Leg Press 4×5 (maintain W7 load)",
+      "RDL 4×5",
+      "Barbell Hip Thrust 4×6",
+      "Bulgarian Split Squat 3×6/leg",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 4×50m",
+      "Wall Balls 5×20",
+    ]},
+    { label:"Day 2", type:"run", title:"Interval Run", items:[
+      "Warm up: 5 min easy",
+      "Main: 4×800m at comfortably hard pace",
+      "Rest: 2 min between intervals",
+      "Cool down: 5 min easy",
+      "Total ~6.5km — longest run so far",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper Strength + Conditioning", items:[
+      "Bench Press 4×4",
+      "Bent Over Row 4×5",
+      "OHP 3×5",
+      "Weighted Pull-ups 4×5",
+      "Face Pulls 3×15",
+      "Finisher: 15 min AMRAP — 250m Ski Erg + 10 Burpee Broad Jumps",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Full Partial Simulation", items:[
+      "6 run-station blocks (1km each run):",
+      "Row / Ski Erg / Sled Push / Sled Pull / Farmers Carry / Wall Balls",
+      "All at doubles weights & distances",
+      "Controlled effort — not all-out, but not easy",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Zone 2 + Core", items:[
+      "30 min easy zone 2",
+      "Core circuit 3×: 30s plank / 10 dead bugs / 20s hollow hold / 15 glute bridges",
+    ]},
+  ]},
+  { week:9, phase:2, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Deload Volume", items:[
+      "Leg Press 3×5 (same load, fewer sets)",
+      "RDL 3×5",
+      "Barbell Hip Thrust 3×8 (moderate load)",
+      "Bulgarian Split Squat 2×8/leg",
+      "Farmers Carry 3×50m",
+      "Wall Balls 3×18",
+    ]},
+    { label:"Day 2", type:"run", title:"Easy Run — Deload", items:[
+      "28 min Zone 2 — true deload",
+      "Feel good going into Phase 3",
+      "Optional: 4 light strides at the end",
+    ]},
+    { label:"Day 3", type:"strength", title:"Upper — Deload Volume", items:[
+      "Bench Press 3×4",
+      "Bent Over Row 3×5",
+      "OHP 3×5",
+      "Pull-ups 3×5",
+      "Face Pulls 2×15",
+      "Light Ski Erg: 3×250m easy",
+    ]},
+    { label:"Day 4", type:"hyrox", title:"Light Technique Day", items:[
+      "Easy run-through of all 8 stations at 60–70%",
+      "Focus: pacing, breathing, transitions",
+      "Review sandbag lunge & wall ball technique",
+      "No PRs — feel fresh entering Phase 3",
+    ]},
+  ]},
+  // ─── PHASE 3 ───
+  { week:10, phase:3, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Heavy (Muscle Retention Priority)", items:[
+      "Leg Press 3×5 (heaviest of the program — send the muscle retention signal)",
+      "RDL 3×5 (heavy)",
+      "Barbell Hip Thrust 4×6 (heaviest yet)",
+      "Bulgarian Split Squat 3×6/leg (heavy DBs)",
+      "Glute-Focused Single Leg Press 3×10/leg",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 4×50m (heaviest)",
+      "Wall Balls 4×20",
+    ]},
+    { label:"Day 2", type:"run", title:"Interval Run", items:[
+      "Warm up: 5 min easy",
+      "Main: 8×400m at race-pace effort",
+      "Rest: 90 sec",
+      "Cool down: 5 min easy",
+      "Total ~6km — volume peaks this phase",
+    ]},
+    { label:"Day 3", type:"hyrox", title:"Full Simulation — 6 Stations", items:[
+      "1km → Row 500m → 1km → Ski Erg 500m",
+      "→ 1km → Sled Push 50m → 1km → Sled Pull 50m",
+      "→ 1km → Burpee Broad Jumps 40m → 1km → Farmers Carry 100m",
+      "Race effort on stations. Manage your run pace conservatively.",
+      "Key focus: don't let run pace fall off after station 3",
+    ]},
+    { label:"Day 4", type:"strength", title:"Upper Strength", items:[
+      "Bench Press 3×5",
+      "Bent Over Row 3×5",
+      "OHP 3×5",
+      "Weighted Pull-ups 3×5",
+      "Face Pulls 3×15",
+      "Core: 3× (30s plank / 10 dead bugs / 20s hollow hold)",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Easy Zone 2 + Glute Accessory", items:[
+      "25 min easy Zone 2",
+      "Banded Glute Bridge 3×20",
+      "Clamshells 3×20/side",
+      "Legs probably tired after Day 3 — keep it genuinely easy",
+    ]},
+  ]},
+  { week:11, phase:3, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Heavy", items:[
+      "Leg Press 3×5 (match or beat W10 load)",
+      "RDL 3×5 (heavy)",
+      "Barbell Hip Thrust 4×6 (match or beat W10)",
+      "Bulgarian Split Squat 3×6/leg",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 4×50m",
+      "Wall Balls 4×20",
+    ]},
+    { label:"Day 2", type:"run", title:"Tempo Run", items:[
+      "Warm up: 5 min easy",
+      "Main: 20 min at comfortably hard pace (can speak words, not sentences)",
+      "Cool down: 5 min easy",
+      "This trains sustained effort — closest to race feel on the runs",
+    ]},
+    { label:"Day 3", type:"hyrox", title:"Full Simulation — All 8 Stations", items:[
+      "The complete doubles course: 8 stations, 1km runs between each",
+      "Row / Ski Erg / Sled Push / Sled Pull / Burpee BJ / Farmers Carry / Sandbag Lunge / Wall Balls",
+      "All at doubles weights & reps",
+      "Pace your runs — station effort near race pace",
+    ]},
+    { label:"Day 4", type:"strength", title:"Upper Strength", items:[
+      "Bench Press 3×5",
+      "Bent Over Row 3×5",
+      "OHP 3×5",
+      "Weighted Pull-ups 3×6",
+      "Face Pulls 3×15",
+      "Finisher: 10 min Row at moderate effort",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Active Recovery", items:[
+      "30 min easy walk or bike",
+      "Foam roll full lower body — glutes, quads, IT band, calves",
+      "Hip 90/90 and couch stretch",
+    ]},
+  ]},
+  { week:12, phase:3, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Heavy", items:[
+      "Leg Press 3×5",
+      "RDL 3×5",
+      "Barbell Hip Thrust 4×6",
+      "Bulgarian Split Squat 3×6/leg",
+      "Glute-Focused Single Leg Press 3×10/leg",
+      "Cable Kickback 3×15/leg",
+      "Farmers Carry 4×50m",
+      "Wall Balls 4×20",
+    ]},
+    { label:"Day 2", type:"run", title:"Interval Run", items:[
+      "Warm up: 5 min easy",
+      "Main: 4×800m at race effort",
+      "Rest: 90 sec",
+      "Cool down: 5 min easy",
+    ]},
+    { label:"Day 3", type:"hyrox", title:"Full Simulation — Race Pace", items:[
+      "Full 8-station doubles simulation again",
+      "Push closer to actual race effort throughout",
+      "Key goal: maintain run pace after station 5, 6, 7",
+      "Time yourself — this is your race-day benchmark",
+    ]},
+    { label:"Day 4", type:"strength", title:"Upper Strength", items:[
+      "Bench Press 3×4",
+      "Bent Over Row 3×5",
+      "OHP 3×5",
+      "Pull-ups 3×6",
+      "Face Pulls 3×15",
+      "Core circuit 3 rounds",
+    ]},
+    { label:"Day 5 (opt)", type:"recovery", title:"Zone 2", items:[
+      "25 min easy — legs are tired from W3 sim",
+      "Prioritize sleep this week more than any other",
+    ]},
+  ]},
+  { week:13, phase:3, days:[
+    { label:"Day 1", type:"strength", title:"Lower A — Begin Volume Reduction", items:[
+      "Leg Press 3×4 (maintain load, drop a rep)",
+      "RDL 3×5",
+      "Barbell Hip Thrust 3×6",
+      "Bulgarian Split Squat 2×6/leg",
+      "Cable Kickback 2×15/leg",
+      "Farmers Carry 3×50m",
+      "Wall Balls 3×18",
+    ]},
+    { label:"Day 2", type:"run", title:"Zone 2 Run", items:[
+      "30 min easy Zone 2",
+      "Begin mental shift into taper mode",
+      "Reflect on your cardio improvement since Week 1 — it's real",
+    ]},
+    { label:"Day 3", type:"hyrox", title:"⚠️ Last Full Simulation", items:[
+      "FINAL full 8-station run — must be done this week (10+ days before race)",
+      "Race effort. Give it everything.",
+      "After today: no more full simulations",
+      "Note weak spots for mental focus in race week",
+    ]},
+    { label:"Day 4", type:"strength", title:"Upper Strength", items:[
+      "Bench Press 3×4",
+      "Bent Over Row 3×4",
+      "OHP 3×5",
+      "Pull-ups 3×5",
+      "Face Pulls 2×15",
+      "Light Row: 2×3 min easy",
+    ]},
+  ]},
+  // ─── PHASE 4 ───
+  { week:14, phase:4, days:[
+    { label:"Day 1", type:"strength", title:"Lower — Light & Sharp", items:[
+      "Leg Press 2×4 (same load — feel the snap, not fatigue)",
+      "RDL 2×5",
+      "Barbell Hip Thrust 2×8 (moderate load)",
+      "Bulgarian Split Squat 2×6/leg",
+      "Farmers Carry 2×40m",
+      "Wall Balls 2×15",
+    ]},
+    { label:"Day 2", type:"run", title:"Short Interval Run", items:[
+      "Warm up: 5 min easy",
+      "Main: 4×400m — feel fast and controlled",
+      "Rest: 2 min (more than usual — feel fresh)",
+      "Cool down: 5 min easy",
+      "Total: ~25 min",
+    ]},
+    { label:"Day 3", type:"hyrox", title:"Half-Course Flush", items:[
+      "Run 1km / Row 500m / Run 1km / Ski Erg 500m",
+      "Run 1km / Burpee Broad Jumps 40m",
+      "70–75% effort — feel sharp, not gassed",
+      "No full simulation this week",
+    ]},
+    { label:"Day 4", type:"strength", title:"Upper — Light & Sharp", items:[
+      "Bench Press 2×4",
+      "Bent Over Row 2×4",
+      "OHP 2×5",
+      "Pull-ups 2×5",
+      "Face Pulls 2×12",
+      "5 min easy Row — just move",
+    ]},
+  ]},
+  { week:15, phase:4, days:[
+    { label:"Mon / Tue", type:"run", title:"Short Easy Run", items:[
+      "20 min very easy Zone 2",
+      "Legs should feel bouncy — that's the taper working",
+      "No watch-staring, just enjoy moving",
+    ]},
+    { label:"Wednesday", type:"strength", title:"Final Activation Lift", items:[
+      "Leg Press 2×3 (light-moderate — just activate the pattern)",
+      "RDL 2×4",
+      "Barbell Hip Thrust 2×8 (moderate — feel the glutes fire)",
+      "Bench Press 2×3",
+      "Pull-ups 2×5",
+      "Wall Balls 2×10",
+      "Done in 30 min max — in and out",
+    ]},
+    { label:"Thursday", type:"recovery", title:"Rest / Walk Only", items:[
+      "Easy 20 min walk — maximum",
+      "Pack your race bag today",
+      "Confirm station split strategy with your partner",
+      "Eat well — moderate carbs, nothing new or unusual",
+    ]},
+    { label:"Friday", type:"recovery", title:"Full Rest", items:[
+      "Complete rest",
+      "Light stretching or yoga if you feel antsy",
+      "Sleep 8+ hours tonight — most important night",
+      "Visualize: runs feel controlled, stations feel powerful",
+    ]},
+    { label:"Saturday", type:"recovery", title:"Pre-Race Day", items:[
+      "Easy 10 min shakeout jog in AM if racing Sunday",
+      "Dynamic warm-up: leg swings, hip circles, arm circles, light skips",
+      "Light meal, good hydration, early bedtime",
+      "Lay out kit, shoes, and gear the night before",
+    ]},
+    { label:"Sun Sep 6 🏁", type:"race", title:"RACE DAY", items:[
+      "Warm up: 10–15 min easy jog + dynamic drills",
+      "First 1km: go SLOWER than you think you should",
+      "Glutes & legs are strong — trust the hip thrust work",
+      "Communicate with your partner between every station",
+      "15 weeks of work behind you — go get it",
+    ]},
+  ]},
+];
+
+// ─── State ───
+let selectedPhase = null;
+let expandedWeek = 1;
+
+// ─── Build phase timeline ───
+const timeline = document.getElementById('phaseTimeline');
+const flexMap = {1:4, 2:5, 3:4, 4:2};
+phases.forEach((p,i) => {
+  const d = document.createElement('div');
+  d.className = 'phase-bar';
+  d.style.cssText = `flex:${flexMap[p.id]}; background:${p.color}18; border-top:2px solid ${p.color};`;
+  d.innerHTML = `<div class="phase-bar-label" style="color:${p.color}">PH${p.id}</div><div class="phase-bar-weeks">Wk ${p.weeks}</div>`;
+  timeline.appendChild(d);
+});
+
+// ─── Build legend ───
+const legend = document.getElementById('legend');
+Object.entries(typeColors).forEach(([k,v]) => {
+  const d = document.createElement('div');
+  d.className = 'legend-item';
+  d.innerHTML = `<div class="legend-dot" style="background:${v.border}"></div><span class="legend-label">${v.label}</span>`;
+  legend.appendChild(d);
+});
+const credits = document.createElement('div');
+credits.className = 'legend-credits';
+credits.textContent = 'HYROX PREP v2 · DOUBLES';
+legend.appendChild(credits);
+
+// ─── Render ───
+function render() {
+  renderFilters();
+  renderBanner();
+  renderWeeks();
+}
+
+function renderFilters() {
+  const el = document.getElementById('filters');
+  el.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-btn';
+  allBtn.textContent = 'ALL WEEKS';
+  allBtn.style.cssText = `background:${selectedPhase===null?'#e2e8f0':'transparent'}; color:${selectedPhase===null?'#07090f':'#94a3b8'}; border-color:${selectedPhase===null?'#e2e8f0':'#334155'};`;
+  allBtn.onclick = () => { selectedPhase = null; expandedWeek = 1; render(); };
+  el.appendChild(allBtn);
+
+  phases.forEach((p,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = `PH${p.id}: ${p.name}`;
+    const active = selectedPhase === p.id;
+    btn.style.cssText = `background:${active?p.color:'transparent'}; color:${active?'#07090f':p.color}; border-color:${p.color};`;
+    btn.onclick = () => {
+      selectedPhase = p.id;
+      expandedWeek = weeks.find(w => w.phase === p.id)?.week || 1;
+      render();
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderBanner() {
+  const el = document.getElementById('phaseBanner');
+  if (!selectedPhase) { el.innerHTML = ''; return; }
+  const p = phases[selectedPhase-1];
+  el.innerHTML = `
+    <div class="phase-banner" style="background:${p.bg}; border-color:${p.color}22; border-left-color:${p.color};">
+      <span class="phase-banner-label" style="color:${p.color}">PHASE ${p.id}</span>
+      <span class="phase-banner-weeks">Weeks ${p.weeks}</span>
+      <span class="phase-banner-sep">—</span>
+      <span class="phase-banner-desc">${p.desc}</span>
+    </div>`;
+}
+
+function renderWeeks() {
+  const el = document.getElementById('weekList');
+  el.innerHTML = '';
+  const filtered = selectedPhase ? weeks.filter(w => w.phase === selectedPhase) : weeks;
+
+  filtered.forEach(wk => {
+    const phase = phases[wk.phase-1];
+    const isOpen = expandedWeek === wk.week;
+    const item = document.createElement('div');
+    item.className = 'week-item';
+
+    // badges
+    let badges = '';
+    if (wk.week===4||wk.week===9) badges += `<span class="week-badge badge-deload">DELOAD</span>`;
+    if (wk.week===13) badges += `<span class="week-badge badge-lastsim">LAST SIM</span>`;
+
+    item.innerHTML = `
+      <button class="week-header" style="background:${isOpen?'#0d1220':'#0a0d16'}; border-color:${isOpen?phase.color+'55':'#1e293b'}; border-radius:${isOpen?'6px 6px 0 0':'6px'};"
+        onclick="toggleWeek(${wk.week})">
+        <div class="week-header-left">
+          <span class="week-num" style="color:${phase.color}">WEEK ${wk.week}</span>
+          <span class="week-phase-tag" style="background:${phase.color}18; color:${phase.color}">PHASE ${wk.phase}</span>
+          <span class="week-sessions">${wk.days.length} sessions</span>
+          ${badges}
+        </div>
+        <span class="week-toggle" style="color:${phase.color}">${isOpen?'−':'+'}</span>
+      </button>`;
+
+    if (isOpen) {
+      const content = document.createElement('div');
+      content.className = 'week-content';
+      content.style.cssText = `border:1px solid ${phase.color}55; border-top:none;`;
+
+      wk.days.forEach(day => {
+        const tc = typeColors[day.type] || typeColors.recovery;
+        const card = document.createElement('div');
+        card.className = 'day-card';
+        card.style.cssText = `background:${tc.bg}; border-color:${tc.border}35; border-top-color:${tc.border};`;
+
+        const itemsHTML = day.items.map(item => {
+          const isArrow = item.startsWith('→');
+          const dot = isArrow ? '' : `<span class="item-dot" style="color:${tc.border}">·</span>`;
+          return `<li class="day-item" style="color:${isArrow?'#cbd5e1':'#94a3b8'}; border-bottom:1px solid #1e293b30;">${dot}${item}</li>`;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="day-card-header">
+            <div>
+              <div class="day-label">${day.label}</div>
+              <div class="day-title">${day.title}</div>
+            </div>
+            <span class="day-type-tag" style="background:${tc.tag}20; color:${tc.tag}">${tc.label}</span>
+          </div>
+          <ul class="day-items">${itemsHTML}</ul>`;
+        content.appendChild(card);
+      });
+
+      item.appendChild(content);
+    }
+
+    el.appendChild(item);
+  });
+}
+
+function toggleWeek(w) {
+  expandedWeek = (expandedWeek === w) ? null : w;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
