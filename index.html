@@ -62,8 +62,8 @@
 <div class="header">
   <div class="header-glow"></div>
   <div class="header-eyebrow">DOUBLES DIVISION · EXPERIENCED LIFTER · GLUTE FOCUS</div>
-  <h1>HYROX 12-WEEK <span style="color:#f97316">PREP PLAN</span> <span style="color:#7c3aed">v4</span></h1>
-  <div class="header-sub">JUN 16 → SEP 6 &nbsp;·&nbsp; 5 SESSIONS/WEEK &nbsp;·&nbsp; MON/TUE/WED/THU/FRI-SAT</div>
+  <h1>HYROX 12-WEEK <span style="color:#f97316">PREP PLAN</span> <span style="color:#7c3aed">v6</span></h1>
+  <div class="header-sub">JUN 16 → SEP 6 &nbsp;·&nbsp; 5 SESSIONS/WEEK &nbsp;·&nbsp; MON/TUE/WED/THU/FRI · MON/TUE/WED/THU/FRI · SAT OPTIONAL · SHOULDER & BACK DOMINANT</div>
   <div class="phase-timeline" id="phaseTimeline"></div>
 </div>
 <div class="filters" id="filters"></div>
@@ -98,6 +98,7 @@ const weeks = [
       "Cable Kickback 3×15/leg (controlled — full hip extension at top)",
       "Farmers Carry 4×30m",
       "Wall Balls 4×12 (light — learn the movement)",
+      "Calf Raises 4×15 (slow eccentric — 3 sec down)",
     ]},
     { label:"Tue Jun 17", type:"run", title:"Easy Zone 2 Run", items:[
       "20 min easy run/walk — conversational pace only",
@@ -105,12 +106,15 @@ const weeks = [
       "Focus: nasal breathing, relaxed jaw & shoulders",
       "This will feel too easy — that's correct",
     ]},
-    { label:"Wed Jun 18", type:"strength", title:"Upper Strength", items:[
-      "Bench Press 4×6",
+    { label:"Wed Jun 18", type:"strength", title:"Upper Strength — Back + Shoulder Focus", items:[
       "Bent Over Row 4×6",
-      "Overhead Press 3×8",
-      "Weighted Pull-ups or Lat Pulldown 3×8",
-      "Face Pulls 3×15 (shoulder health — key for ski erg)",
+      "Weighted Pull-ups or Lat Pulldown 4×8",
+      "Overhead Press 4×8",
+      "Lateral Raises 3×15 (controlled — feel the shoulder)",
+      "Face Pulls 3×15",
+      "Rear Delt Fly 3×15",
+      "Hammer Curls 3×12",
+      "Bench Press 2×8 (maintenance volume only)",
       "Ski Erg: 3×2 min easy, 2 min rest",
     ]},
     { label:"Thu Jun 19 — TRAINER", type:"hyrox", title:"Station Intro Circuit", items:[
@@ -130,6 +134,15 @@ const weeks = [
       "Single Leg Glute Bridge 3×12/leg (bodyweight, slow)",
       "Hip flexor + hamstring stretch: 10 min",
     ]},
+    { label:"Sat Jun 21 (optional)", type:"strength", title:"Hamstring + Quad Accessory", items:[
+      "Leg Curl (lying or seated) 4×12",
+      "Leg Extension 4×12",
+      "Walking Lunges 3×12/leg",
+      "Nordic Hamstring Curl 3×8 — OR — Swiss Ball Hamstring Curl 3×12",
+      "Single Leg RDL 3×10/leg (balance + hamstring focus)",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 4×15 (seated if available — hits soleus)",
+    ]},
   ]},
   { week:2, phase:1, dates:"Jun 23–29", days:[
     { label:"Mon Jun 23", type:"strength", title:"Lower A — Quad + Glute Focus", items:[
@@ -141,6 +154,7 @@ const weeks = [
       "Glute-Focused Single Leg Press 3×10/leg (foot high on platform)",
       "Farmers Carry 4×35m",
       "Wall Balls 4×15",
+      "Calf Raises 4×15",
     ]},
     { label:"Tue Jun 24", type:"run", title:"Zone 2 Run", items:[
       "22–25 min continuous easy pace",
@@ -148,11 +162,14 @@ const weeks = [
       "Still fully conversational",
     ]},
     { label:"Wed Jun 25", type:"strength", title:"Upper Strength + Conditioning", items:[
-      "Bench Press 4×5",
       "Bent Over Row 4×6",
-      "OHP 3×8",
-      "Weighted Pull-ups 3×6",
+      "Weighted Pull-ups 4×6",
+      "OHP 4×8",
+      "Lateral Raises 3×15",
       "Face Pulls 3×15",
+      "Rear Delt Fly 3×15",
+      "Hammer Curls 3×12",
+      "Bench Press 2×6 (maintenance)",
       "Finisher: 10 min alternating 250m Row / 10 Burpee Broad Jumps",
     ]},
     { label:"Thu Jun 26 — TRAINER", type:"hyrox", title:"Station Work", items:[
@@ -170,6 +187,15 @@ const weeks = [
       "Single Leg Glute Bridge 3×12/leg",
       "Hip 90/90 stretch × 2 min/side",
     ]},
+    { label:"Sat Jun 28 (optional)", type:"strength", title:"Hamstring + Quad Accessory", items:[
+      "Leg Curl 4×12 (add load vs W1)",
+      "Leg Extension 4×12",
+      "Walking Lunges 3×12/leg",
+      "Nordic Hamstring Curl 3×8 — OR — Swiss Ball Hamstring Curl 3×12",
+      "Single Leg RDL 3×10/leg",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 4×15",
+    ]},
   ]},
   { week:3, phase:1, dates:"Jun 30–Jul 6", days:[
     { label:"Mon Jun 30", type:"strength", title:"Lower A — Deload Volume", items:[
@@ -180,6 +206,7 @@ const weeks = [
       "Cable Kickback 2×15/leg",
       "Farmers Carry 3×35m",
       "Wall Balls 3×15",
+      "Calf Raises 3×15",
     ]},
     { label:"Tue Jul 1", type:"run", title:"Easy Run — Deload", items:[
       "22 min easy Zone 2 — true deload effort",
@@ -187,11 +214,13 @@ const weeks = [
       "No strides this week",
     ]},
     { label:"Wed Jul 2", type:"strength", title:"Upper — Deload Volume", items:[
-      "Bench Press 3×5",
       "Bent Over Row 3×6",
-      "OHP 3×6",
       "Pull-ups 3×5",
+      "OHP 3×6",
+      "Lateral Raises 2×15",
       "Face Pulls 2×15",
+      "Hammer Curls 2×12",
+      "Bench Press 1×8 (maintenance)",
       "Light Ski Erg: 2×3 min easy",
     ]},
     { label:"Thu Jul 3 — TRAINER", type:"hyrox", title:"Light Station Review", items:[
@@ -207,6 +236,14 @@ const weeks = [
       "Clamshells 3×20/side",
       "Full body stretch: 15 min",
     ]},
+    { label:"Sat Jul 5 (optional)", type:"strength", title:"Hamstring + Quad Accessory — Deload", items:[
+      "Leg Curl 3×12 (moderate — deload week)",
+      "Leg Extension 3×12",
+      "Walking Lunges 2×10/leg",
+      "Swiss Ball Hamstring Curl 3×12 (Nordic alternative)",
+      "Single Leg RDL 2×10/leg",
+      "Calf Raises 3×15",
+    ]},
   ]},
 
   // ─── PHASE 2: BUILD (Weeks 4–7) ───
@@ -220,6 +257,7 @@ const weeks = [
       "Cable Kickback 3×15/leg",
       "Farmers Carry 4×50m",
       "Wall Balls 5×18",
+      "Calf Raises 4×15",
     ]},
     { label:"Tue Jul 8", type:"run", title:"Zone 2 Run", items:[
       "30 min continuous Zone 2",
@@ -227,11 +265,14 @@ const weeks = [
       "Slightly more effort than Phase 1",
     ]},
     { label:"Wed Jul 9", type:"strength", title:"Upper Strength + Conditioning", items:[
-      "Bench Press 4×5",
       "Bent Over Row 4×5",
-      "OHP 3×6",
-      "Weighted Pull-ups 3×6",
+      "Weighted Pull-ups 4×6",
+      "OHP 4×6",
+      "Lateral Raises 3×15",
       "Face Pulls 3×15",
+      "Rear Delt Fly 3×15",
+      "Hammer Curls 3×10",
+      "Bench Press 2×6 (maintenance)",
       "Finisher: 12 min AMRAP — 250m Ski Erg + 8 Burpee Broad Jumps",
     ]},
     { label:"Thu Jul 10 — TRAINER", type:"hyrox", title:"Run + Station Combo", items:[
@@ -247,6 +288,15 @@ const weeks = [
       "Single Leg Glute Bridge 3×12/leg",
       "Hip flexor + hamstring stretch: 10 min",
     ]},
+    { label:"Sat Jul 12 (optional)", type:"strength", title:"Hamstring + Quad Accessory", items:[
+      "Leg Curl 4×10 (heavier than Phase 1)",
+      "Leg Extension 4×10",
+      "Walking Lunges 3×12/leg (add DBs)",
+      "Nordic Hamstring Curl 3×8 — OR — Swiss Ball Hamstring Curl 3×12",
+      "Single Leg RDL 3×10/leg (heavier)",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 4×12 (add load)",
+    ]},
   ]},
   { week:5, phase:2, dates:"Jul 14–20", days:[
     { label:"Mon Jul 14", type:"strength", title:"Lower A — Quad + Glute", items:[
@@ -258,6 +308,7 @@ const weeks = [
       "Cable Kickback 3×15/leg",
       "Farmers Carry 4×50m",
       "Wall Balls 5×20",
+      "Calf Raises 4×12 (add load — standing calf raise machine)",
     ]},
     { label:"Tue Jul 15", type:"run", title:"Interval Run", items:[
       "Warm up: 5 min easy jog",
@@ -266,12 +317,15 @@ const weeks = [
       "Cool down: 5 min easy",
       "Total ~4.5km — first real interval session",
     ]},
-    { label:"Wed Jul 16", type:"strength", title:"Upper Strength", items:[
-      "Bench Press 4×5",
+    { label:"Wed Jul 16", type:"strength", title:"Upper Strength — Back + Shoulder Focus", items:[
       "Bent Over Row 4×5",
-      "OHP 3×6",
-      "Weighted Pull-ups 3×6",
+      "Weighted Pull-ups 4×5",
+      "OHP 4×6",
+      "Lateral Raises 3×15",
       "Face Pulls 3×15",
+      "Rear Delt Fly 3×15",
+      "Cable Curl 3×12 (bicep retention)",
+      "Bench Press 2×5 (maintenance)",
       "Ski Erg: 5×250m moderate-hard, 60 sec rest",
     ]},
     { label:"Thu Jul 17 — TRAINER", type:"hyrox", title:"Partial Hyrox Simulation", items:[
@@ -286,6 +340,15 @@ const weeks = [
       "Hip 90/90 × 2 min/side, couch stretch × 90 sec/side",
       "Foam roll: quads, IT band, glutes, calves",
     ]},
+    { label:"Sat Jul 19 (optional)", type:"strength", title:"Hamstring + Quad Accessory", items:[
+      "Leg Curl 4×10 (heavier)",
+      "Leg Extension 4×10",
+      "Walking Lunges 3×12/leg (heavier DBs)",
+      "Nordic Hamstring Curl 3×8 — OR — Swiss Ball Hamstring Curl 3×12",
+      "Single Leg RDL 3×10/leg",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 4×12",
+    ]},
   ]},
   { week:6, phase:2, dates:"Jul 21–27", days:[
     { label:"Mon Jul 21", type:"strength", title:"Lower A — Quad + Glute (Peak Volume)", items:[
@@ -297,6 +360,7 @@ const weeks = [
       "Cable Kickback 3×15/leg",
       "Farmers Carry 5×50m",
       "Wall Balls 5×20",
+      "Calf Raises 5×12 (peak volume — heavy)",
     ]},
     { label:"Tue Jul 22", type:"run", title:"Zone 2 + Strides", items:[
       "33 min Zone 2 run",
@@ -304,11 +368,14 @@ const weeks = [
       "Focus on relaxed fast turnover during strides",
     ]},
     { label:"Wed Jul 23", type:"strength", title:"Upper Strength + Row", items:[
-      "Bench Press 4×4",
       "Bent Over Row 4×5",
-      "OHP 3×5",
       "Weighted Pull-ups 4×5",
+      "OHP 4×5",
+      "Lateral Raises 3×15",
       "Face Pulls 3×15",
+      "Rear Delt Fly 3×12",
+      "Hammer Curls 3×10",
+      "Bench Press 2×4 (maintenance)",
       "Row: 3×500m at race effort, 2 min rest",
     ]},
     { label:"Thu Jul 24 — TRAINER", type:"hyrox", title:"Stations Under Fatigue", items:[
@@ -324,6 +391,15 @@ const weeks = [
       "Single Leg Glute Bridge 3×12/leg",
       "Breathing drills: box breathing 4-4-4-4 × 5 min",
     ]},
+    { label:"Sat Jul 26 (optional)", type:"strength", title:"Hamstring + Quad Accessory (Peak Volume)", items:[
+      "Leg Curl 5×10 (peak sets)",
+      "Leg Extension 5×10",
+      "Walking Lunges 4×10/leg (heaviest)",
+      "Nordic Hamstring Curl 4×8 — OR — Swiss Ball Hamstring Curl 4×12",
+      "Single Leg RDL 4×8/leg (heavy)",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 5×12 (heavy — peak calf volume)",
+    ]},
   ]},
   { week:7, phase:2, dates:"Jul 28–Aug 3", days:[
     { label:"Mon Jul 28", type:"strength", title:"Lower A — Deload Volume", items:[
@@ -334,6 +410,7 @@ const weeks = [
       "Cable Kickback 2×15/leg",
       "Farmers Carry 3×50m",
       "Wall Balls 3×18",
+      "Calf Raises 3×15 (deload — moderate)",
     ]},
     { label:"Tue Jul 29", type:"run", title:"Easy Run — Deload", items:[
       "25 min Zone 2 — true deload",
@@ -341,11 +418,13 @@ const weeks = [
       "Optional: 4 light strides at the end",
     ]},
     { label:"Wed Jul 30", type:"strength", title:"Upper — Deload Volume", items:[
-      "Bench Press 3×4",
       "Bent Over Row 3×5",
-      "OHP 3×5",
       "Pull-ups 3×5",
+      "OHP 3×5",
+      "Lateral Raises 2×15",
       "Face Pulls 2×15",
+      "Hammer Curls 2×10",
+      "Bench Press 1×6 (maintenance)",
       "Light Ski Erg: 3×250m easy",
     ]},
     { label:"Thu Jul 31 — TRAINER", type:"hyrox", title:"Light Technique Day", items:[
@@ -358,6 +437,14 @@ const weeks = [
       "20 min easy walk",
       "Banded Glute Bridge 3×20",
       "Full body stretch & foam roll: 20 min",
+    ]},
+    { label:"Sat Aug 2 (optional)", type:"strength", title:"Hamstring + Quad Accessory — Deload", items:[
+      "Leg Curl 3×12 (moderate — deload week)",
+      "Leg Extension 3×12",
+      "Walking Lunges 2×10/leg",
+      "Swiss Ball Hamstring Curl 3×12 (Nordic alternative)",
+      "Single Leg RDL 2×10/leg",
+      "Calf Raises 3×15",
     ]},
   ]},
 
@@ -372,6 +459,7 @@ const weeks = [
       "Cable Kickback 3×15/leg",
       "Farmers Carry 4×50m (heaviest)",
       "Wall Balls 4×20",
+      "Calf Raises 4×12 (heavy)",
     ]},
     { label:"Tue Aug 5", type:"run", title:"Interval Run", items:[
       "Warm up: 5 min easy",
@@ -380,12 +468,15 @@ const weeks = [
       "Cool down: 5 min easy",
       "Total ~6km — volume peaks this phase",
     ]},
-    { label:"Wed Aug 6", type:"strength", title:"Upper Strength", items:[
-      "Bench Press 3×5",
+    { label:"Wed Aug 6", type:"strength", title:"Upper Strength — Race Specific", items:[
       "Bent Over Row 3×5",
-      "OHP 3×5",
       "Weighted Pull-ups 3×5",
+      "OHP 3×5",
+      "Lateral Raises 3×15",
       "Face Pulls 3×15",
+      "Rear Delt Fly 3×12",
+      "Hammer Curls 2×10",
+      "Bench Press 2×4 (maintenance)",
       "Core: 3× (30s plank / 10 dead bugs / 20s hollow hold)",
     ]},
     { label:"Thu Aug 7 — TRAINER", type:"hyrox", title:"Full Simulation — 6 Stations", items:[
@@ -401,6 +492,15 @@ const weeks = [
       "Clamshells 3×20/side",
       "Legs will be tired after Thu — keep it genuinely easy",
     ]},
+    { label:"Sat Aug 9 (optional)", type:"strength", title:"Hamstring + Quad Accessory", items:[
+      "Leg Curl 4×10",
+      "Leg Extension 4×10",
+      "Walking Lunges 3×10/leg",
+      "Nordic Hamstring Curl 3×8 — OR — Swiss Ball Hamstring Curl 3×12",
+      "Single Leg RDL 3×8/leg",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 4×12",
+    ]},
   ]},
   { week:9, phase:3, dates:"Aug 11–17", days:[
     { label:"Mon Aug 11", type:"strength", title:"Lower A — Heavy", items:[
@@ -411,6 +511,7 @@ const weeks = [
       "Cable Kickback 3×15/leg",
       "Farmers Carry 4×50m",
       "Wall Balls 4×20",
+      "Calf Raises 4×12",
     ]},
     { label:"Tue Aug 12", type:"run", title:"Tempo Run", items:[
       "Warm up: 5 min easy",
@@ -418,12 +519,15 @@ const weeks = [
       "Cool down: 5 min easy",
       "Trains sustained effort — closest to race feel on the runs",
     ]},
-    { label:"Wed Aug 13", type:"strength", title:"Upper Strength", items:[
-      "Bench Press 3×5",
+    { label:"Wed Aug 13", type:"strength", title:"Upper Strength — Race Specific", items:[
       "Bent Over Row 3×5",
-      "OHP 3×5",
       "Weighted Pull-ups 3×6",
+      "OHP 3×5",
+      "Lateral Raises 3×15",
       "Face Pulls 3×15",
+      "Rear Delt Fly 3×12",
+      "Cable Curl 2×12",
+      "Bench Press 2×4 (maintenance)",
       "Finisher: 10 min Row at moderate effort",
     ]},
     { label:"Thu Aug 14 — TRAINER", type:"hyrox", title:"Full Simulation — All 8 Stations", items:[
@@ -437,6 +541,15 @@ const weeks = [
       "Foam roll full lower body — glutes, quads, IT band, calves",
       "Hip 90/90 and couch stretch",
     ]},
+    { label:"Sat Aug 16 (optional)", type:"strength", title:"Hamstring + Quad Accessory", items:[
+      "Leg Curl 4×10",
+      "Leg Extension 4×10",
+      "Walking Lunges 3×10/leg",
+      "Nordic Hamstring Curl 3×8 — OR — Swiss Ball Hamstring Curl 3×12",
+      "Single Leg RDL 3×8/leg",
+      "Glute-Ham Raise 3×10 — OR — Stability Ball Leg Curl 3×12",
+      "Calf Raises 4×12",
+    ]},
   ]},
   { week:10, phase:3, dates:"Aug 18–24", days:[
     { label:"Mon Aug 18", type:"strength", title:"Lower A — Begin Volume Reduction", items:[
@@ -447,6 +560,7 @@ const weeks = [
       "Cable Kickback 2×15/leg",
       "Farmers Carry 3×50m",
       "Wall Balls 3×18",
+      "Calf Raises 3×12 (volume reducing)",
     ]},
     { label:"Tue Aug 19", type:"run", title:"Interval Run", items:[
       "Warm up: 5 min easy",
@@ -454,12 +568,14 @@ const weeks = [
       "Rest: 90 sec",
       "Cool down: 5 min easy",
     ]},
-    { label:"Wed Aug 20", type:"strength", title:"Upper Strength", items:[
-      "Bench Press 3×4",
+    { label:"Wed Aug 20", type:"strength", title:"Upper Strength — Volume Reducing", items:[
       "Bent Over Row 3×4",
-      "OHP 3×5",
       "Pull-ups 3×5",
+      "OHP 3×5",
+      "Lateral Raises 2×15",
       "Face Pulls 2×15",
+      "Hammer Curls 2×10",
+      "Bench Press 1×5 (maintenance)",
       "Light Row: 2×3 min easy",
     ]},
     { label:"Thu Aug 21 — TRAINER ⚠️", type:"hyrox", title:"Last Full Simulation", items:[
@@ -473,6 +589,14 @@ const weeks = [
       "25 min easy — legs are tired from Thu sim",
       "Prioritize sleep this week above everything",
     ]},
+    { label:"Sat Aug 23 (optional)", type:"strength", title:"Hamstring + Quad — Volume Reducing", items:[
+      "Leg Curl 3×10 (reduce volume into taper)",
+      "Leg Extension 3×10",
+      "Walking Lunges 2×10/leg",
+      "Swiss Ball Hamstring Curl 3×12 (Nordic alternative)",
+      "Single Leg RDL 2×10/leg",
+      "Calf Raises 3×12",
+    ]},
   ]},
 
   // ─── PHASE 4: TAPER (Weeks 11–12) ───
@@ -484,6 +608,7 @@ const weeks = [
       "Bulgarian Split Squat 2×6/leg",
       "Farmers Carry 2×40m",
       "Wall Balls 2×15",
+      "Calf Raises 2×15 (light — just activate)",
     ]},
     { label:"Tue Aug 26", type:"run", title:"Short Interval Run", items:[
       "Warm up: 5 min easy",
@@ -493,11 +618,13 @@ const weeks = [
       "Total: ~25 min",
     ]},
     { label:"Wed Aug 27", type:"strength", title:"Upper — Light & Sharp", items:[
-      "Bench Press 2×4",
       "Bent Over Row 2×4",
-      "OHP 2×5",
       "Pull-ups 2×5",
+      "OHP 2×5",
+      "Lateral Raises 2×12",
       "Face Pulls 2×12",
+      "Hammer Curls 2×10",
+      "Bench Press 1×4 (maintenance)",
       "5 min easy Row — just move",
     ]},
     { label:"Thu Aug 28 — TRAINER", type:"hyrox", title:"Half-Course Flush", items:[
@@ -511,6 +638,14 @@ const weeks = [
       "Full body mobility: 15 min",
       "Last real training week — absorb it and rest",
     ]},
+    { label:"Sat Aug 30 (optional)", type:"strength", title:"Hamstring + Quad — Light & Sharp", items:[
+      "Leg Curl 2×12 (light — just activate)",
+      "Leg Extension 2×12",
+      "Walking Lunges 2×8/leg (no added weight)",
+      "Swiss Ball Hamstring Curl 2×12",
+      "Calf Raises 2×15 (light)",
+      "Last optional session before race week — keep it easy",
+    ]},
   ]},
   { week:12, phase:4, dates:"Sep 1–6", days:[
     { label:"Mon Sep 1", type:"run", title:"Short Easy Run", items:[
@@ -522,8 +657,9 @@ const weeks = [
       "Leg Press 2×3 (light-moderate — activate the pattern)",
       "RDL 2×4",
       "Barbell Hip Thrust 2×8 (moderate — feel the glutes fire)",
-      "Bench Press 2×3",
       "Pull-ups 2×5",
+      "OHP 2×5",
+      "Face Pulls 2×12",
       "Wall Balls 2×10",
       "Done in 30 min max — in and out",
     ]},
@@ -577,7 +713,7 @@ Object.entries(typeColors).forEach(([k,v]) => {
 });
 const credits = document.createElement('div');
 credits.className = 'legend-credits';
-credits.textContent = 'HYROX PREP v4 · JUN 16 → SEP 6';
+credits.textContent = 'HYROX PREP v6 · JUN 16 → SEP 6';
 legend.appendChild(credits);
 
 function render() { renderFilters(); renderBanner(); renderWeeks(); }
